@@ -1,4 +1,7 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+
+import Subheading from "./Subheading";
+import Text from "./Text";
 
 const RepositoryItem = ({
   fullName,
@@ -11,7 +14,7 @@ const RepositoryItem = ({
 }) => {
   return (
     <View>
-      <Text>Full name: {fullName}</Text>
+      <Subheading>{fullName}</Subheading>
       <Text>Description: {description}</Text>
       <Text>Language: {language}</Text>
       <Text>Stars: {stargazerCount}</Text>
