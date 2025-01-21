@@ -1,5 +1,6 @@
 import Constants from "expo-constants";
 import { StyleSheet, View } from "react-native";
+import { useNavigate } from "react-router-native";
 
 import theme from "../theme";
 import AppBarTab from "./AppBarTab";
@@ -14,9 +15,11 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const navigate = useNavigate();
   return (
     <View style={styles.container}>
-      <AppBarTab title="Repositories" onPress={() => {}} />
+      <AppBarTab title="Repositories" onPress={() => navigate("/")} />
+      <AppBarTab title="Sign In" onPress={() => navigate("/signin")} />
     </View>
   );
 };
