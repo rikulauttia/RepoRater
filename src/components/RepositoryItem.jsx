@@ -1,26 +1,62 @@
-import { View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
-import Subheading from "./Subheading";
+import LanguageTag from "./LanguageTag";
+import RepositoryStats from "./RepositoryStats";
 import Text from "./Text";
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 15,
+    backgroundColor: "white",
+    marginBottom: 10,
+  },
+  topContainer: {
+    flexDirection: "row",
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 4,
+    marginRight: 10,
+  },
+  infoContainer: {
+    flex: 1,
+  },
+  description: {
+    marginTop: 5,
+  },
+});
 
 const RepositoryItem = ({
   fullName,
   description,
   language,
   forksCount,
-  stargazerCount,
+  stargazersCount,
   reviewCount,
   ratingAverage,
+  ownerAvatarUrl,
 }) => {
   return (
-    <View>
-      <Subheading>{fullName}</Subheading>
-      <Text>Description: {description}</Text>
-      <Text>Language: {language}</Text>
-      <Text>Stars: {stargazerCount}</Text>
-      <Text>Forks: {forksCount}</Text>
-      <Text>Reviews: {reviewCount}</Text>
-      <Text>Rating: {ratingAverage}</Text>
+    <View style={styles.container}>
+      <View style={styles.topContainer}>
+        <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
+        <View style={styles.infoContainer}>
+          <Text fontSize="subheading" fontWeight="bold">
+            {fullName}
+          </Text>
+          <Text color="textSecondary" style={styles.description}>
+            {description}
+          </Text>
+          <LanguageTag language={language} />
+        </View>
+      </View>
+      <RepositoryStats
+        stars={stargazersCount}
+        forks={forksCount}
+        reviews={reviewCount}
+        rating={ratingAverage}
+      />
     </View>
   );
 };
