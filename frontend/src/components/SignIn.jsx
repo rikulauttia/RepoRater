@@ -1,6 +1,15 @@
 import { useFormik } from "formik";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import * as yup from "yup";
+
+import useSignIn from "../hooks/useSignIn";
 
 const initialValues = {
   username: "",
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SigInForm = ({ onSubmit }) => {
+const SignInForm = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -99,10 +108,21 @@ const SigInForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data);
+      Alert.alert("Sign In Succesful", "Welcome back!");
+    } catch (e) {
+      console.log(e);
+      Alert.alert("Sign In Failed", e.message || "Invalid credentials");
+    }
   };
-  return <SigInForm onSubmit={onSubmit} />;
+  return <SignInForm onSubmit={onSubmit} />;
 };
 
 export default SignIn;
