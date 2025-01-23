@@ -74,7 +74,6 @@ yarn start
 - [Full Stack Open](https://fullstackopen.com/) for the excellent React Native curriculum
 - [GitHub](https://github.com) for their GraphQL API
 - [React Native Community](https://reactnative.dev/community/overview) for their invaluable resources
-- All our contributors and users
 
 ---
 
