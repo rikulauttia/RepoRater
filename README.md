@@ -91,8 +91,4 @@ yarn start
 
 Made with 💻 & ☕ by [rikulauttia](https://github.com/rikulauttia)
 
-<a href="https://visitcount.itsvg.in">
-  <img src="https://visitcount.itsvg.in/api?id=rikulauttia&label=Repo%20Views&color=12&icon=5&pretty=true" />
-</a>
-
 </div>
