@@ -1,15 +1,26 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { useParams } from "react-router-native";
 
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
+import ReviewItem from "./ReviewItem";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "e1e4e8",
   },
+  separator: {
+    height: 10,
+    backgroundColor: "#e1e4e8",
+  },
 });
+
+export const RepositoryInfo = ({ repository }) => {
+  return <RepositoryItem repository={repository} showGitButton />;
+};
+
+const ItemSeparator = () => <View style={styles.container} />;
 
 const SingleRepositoryView = () => {
   const { id } = useParams();
@@ -22,10 +33,17 @@ const SingleRepositoryView = () => {
       </View>
     );
   }
+
+  const reviews = repository.reviews.edges.map((edge) => edge.node);
+
   return (
-    <View style={styles.container}>
-      <RepositoryItem repository={repository} showGitButton />
-    </View>
+    <FlatList
+      data={reviews}
+      renderItem={({ item }) => <ReviewItem review={item} />}
+      keyExtractor={({ id }) => id}
+      ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+      ItemSeparatorComponent={ItemSeparator}
+    />
   );
 };
 
