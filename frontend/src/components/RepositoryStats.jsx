@@ -20,19 +20,27 @@ const RepositoryStats = ({ stars, forks, reviews, rating }) => {
   return (
     <View style={styles.container}>
       <View style={styles.statItem}>
-        <Text fontWeight="bold">{formatCount(stars)}</Text>
+        <Text testID="repositoryStars" fontWeight="bold">
+          {formatCount(stars)}
+        </Text>
         <Text color="textSecondary">Stars</Text>
       </View>
       <View style={styles.statItem}>
-        <Text fontWeight="bold">{formatCount(forks)}</Text>
+        <Text testID="repositoryForks" fontWeight="bold">
+          {formatCount(forks)}
+        </Text>
         <Text color="textSecondary">Forks</Text>
       </View>
       <View style={styles.statItem}>
-        <Text fontWeight="bold">{formatCount(reviews)}</Text>
+        <Text testID="repositoryReviews" fontWeight="bold">
+          {formatCount(reviews)}
+        </Text>
         <Text color="textSecondary">Reviews</Text>
       </View>
       <View style={styles.statItem}>
-        <Text fontWeight="bold">{formatCount(rating)}</Text>
+        <Text testID="repositoryRating" fontWeight="bold">
+          {formatCount(rating)}
+        </Text>
         <Text color="textSecondary">Rating</Text>
       </View>
     </View>

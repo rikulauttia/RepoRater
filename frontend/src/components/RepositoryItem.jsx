@@ -27,28 +27,34 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({
-  fullName,
-  description,
-  language,
-  forksCount,
-  stargazersCount,
-  reviewCount,
-  ratingAverage,
-  ownerAvatarUrl,
-}) => {
+const RepositoryItem = ({ repository }) => {
+  const {
+    fullName,
+    description,
+    language,
+    forksCount,
+    stargazersCount,
+    reviewCount,
+    ratingAverage,
+    ownerAvatarUrl,
+  } = repository;
+
   return (
-    <View style={styles.container}>
+    <View testID="repositoryItem" style={styles.container}>
       <View style={styles.topContainer}>
         <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
         <View style={styles.infoContainer}>
-          <Text fontSize="subheading" fontWeight="bold">
+          <Text
+            testID="repositoryFullName"
+            fontSize="subheading"
+            fontWeight="bold"
+          >
             {fullName}
           </Text>
           <Text color="textSecondary" style={styles.description}>
             {description}
           </Text>
-          <LanguageTag language={language} />
+          <LanguageTag testID="repositoryLanguage" language={language} />
         </View>
       </View>
       <RepositoryStats

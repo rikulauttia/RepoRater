@@ -15,8 +15,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const LanguagTag = ({ language }) => {
-  return <Text style={styles.tag}>{language}</Text>;
+const LanguagTag = ({ language, testID }) => {
+  return (
+    <Text testID={testID} style={styles.tag}>
+      {language}
+    </Text>
+  );
 };
 
 export default LanguagTag;
