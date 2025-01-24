@@ -45,6 +45,12 @@ const AppBar = () => {
         ) : (
           <AppBarTab title="Sign In" onPress={() => navigate("/signin")} />
         )}
+        {isLoggedIn && (
+          <AppBarTab
+            title="Create a review"
+            onPress={() => navigate("/create-review")}
+          />
+        )}
       </ScrollView>
     </View>
   );
