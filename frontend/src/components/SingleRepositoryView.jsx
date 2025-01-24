@@ -8,7 +8,7 @@ import ReviewItem from "./ReviewItem";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "e1e4e8",
+    backgroundColor: "#e1e4e8",
   },
   separator: {
     height: 10,
@@ -20,7 +20,7 @@ export const RepositoryInfo = ({ repository }) => {
   return <RepositoryItem repository={repository} showGitButton />;
 };
 
-const ItemSeparator = () => <View style={styles.container} />;
+const ItemSeparator = () => <View style={styles.separator} />;
 
 const SingleRepositoryView = () => {
   const { id } = useParams();
@@ -34,7 +34,7 @@ const SingleRepositoryView = () => {
     );
   }
 
-  const reviews = repository.reviews.edges.map((edge) => edge.node);
+  const reviews = repository?.reviews?.edges?.map((edge) => edge.node) || [];
 
   return (
     <FlatList

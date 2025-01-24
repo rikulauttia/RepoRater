@@ -1,5 +1,12 @@
 import { useFormik } from "formik";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { useNavigate } from "react-router-native";
 import * as Yup from "yup";
 
@@ -112,16 +119,23 @@ const CreateReview = () => {
     const { ownerName, repositoryName, rating, review } = values;
 
     try {
-      const { data } = await createReview({
+      const data = await createReview({
         ownerName,
         repositoryName,
         rating: Number(rating),
         text: review,
       });
-      const repositoryId = data.createReview.repositoryId;
-      navigate(`/repository/${repositoryId}`);
+
+      const repositoryId = data?.createReview?.repositoryId;
+      if (repositoryId) {
+        navigate(`/repository/${repositoryId}`);
+        resetForm();
+      }
     } catch (e) {
-      console.log(e);
+      Alert.alert(
+        "Error",
+        e.message || "An error occurred while submitting the review"
+      );
     }
   };
   return <CreateReviewForm onSubmit={onSubmit} />;
