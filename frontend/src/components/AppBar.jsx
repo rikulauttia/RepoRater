@@ -43,7 +43,10 @@ const AppBar = () => {
         {isLoggedIn ? (
           <AppBarTab title="Sign Out" onPress={signOut} />
         ) : (
-          <AppBarTab title="Sign In" onPress={() => navigate("/signin")} />
+          <>
+            <AppBarTab title="Sign In" onPress={() => navigate("/signin")} />
+            <AppBarTab title="Sign Up" onPress={() => navigate("/signup")} />
+          </>
         )}
         {isLoggedIn && (
           <AppBarTab
