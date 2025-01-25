@@ -81,7 +81,7 @@ export class RepositoryListContainer extends React.Component {
   };
 
   render() {
-    const { repositories, navigate } = this.props;
+    const { repositories, navigate, onEndReach } = this.props;
     const repositoryNodes = repositories?.edges?.map((edge) => edge.node) || [];
     return (
       <FlatList
@@ -95,6 +95,8 @@ export class RepositoryListContainer extends React.Component {
         )}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={this.renderHeader}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
   }
@@ -109,10 +111,15 @@ const RepositoryList = () => {
     highestRated: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" },
     lowestRated: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
   };
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
+    first: 3,
     ...orderVariables[selectedOrder],
     searchKeyword: debouncedSearchKeyword,
   });
+  const onEndReach = () => {
+    console.log("You have reached the end of the list");
+    fetchMore();
+  };
   const navigate = useNavigate();
   return (
     <RepositoryListContainer
@@ -122,6 +129,7 @@ const RepositoryList = () => {
       setSelectedOrder={setSelectedOrder}
       searchKeyword={searchKeyword}
       setSearchKeyword={setSearchKeyword}
+      onEndReach={onEndReach}
     />
   );
 };
