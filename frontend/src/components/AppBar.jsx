@@ -49,10 +49,16 @@ const AppBar = () => {
           </>
         )}
         {isLoggedIn && (
-          <AppBarTab
-            title="Create a review"
-            onPress={() => navigate("/create-review")}
-          />
+          <>
+            <AppBarTab
+              title="Create a review"
+              onPress={() => navigate("/create-review")}
+            />
+            <AppBarTab
+              title="My reviews"
+              onPress={() => navigate("/my-reviews")}
+            />
+          </>
         )}
       </ScrollView>
     </View>

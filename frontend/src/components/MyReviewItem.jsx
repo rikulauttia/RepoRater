@@ -32,13 +32,16 @@ const styles = StyleSheet.create({
     color: "#586069",
     marginBottom: 5,
   },
-  text: {
-    color: "#24292e",
+  separator: {
+    height: 10,
+    backgroundColor: "#e1e4e8",
   },
 });
 
-const ReviewItem = ({ review }) => {
-  const { rating, text, user, createdAt } = review;
+const ItemSeparator = () => <View style={styles.separator} />;
+
+const MyReviewItem = ({ review }) => {
+  const { rating, text, createdAt, repository } = review;
 
   return (
     <View style={styles.container}>
@@ -46,14 +49,15 @@ const ReviewItem = ({ review }) => {
         <Text style={styles.ratingText}>{rating}</Text>
       </View>
       <View style={styles.reviewContent}>
-        <Text style={styles.username}>{user?.username}</Text>
+        <Text style={styles.username}>{repository.fullName}</Text>
         <Text style={styles.date}>
           {format(new Date(createdAt), "dd.MM.yyyy")}
         </Text>
-        <Text style={styles.ratingText}>{text}</Text>
+        <Text>{text}</Text>
       </View>
     </View>
   );
 };
 
-export default ReviewItem;
+export default MyReviewItem;
+export { ItemSeparator };
