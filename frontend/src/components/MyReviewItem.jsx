@@ -1,5 +1,6 @@
 import { format } from "date-fns";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -36,12 +37,33 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: "#e1e4e8",
   },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 10,
+  },
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const MyReviewItem = ({ review }) => {
+const MyReviewItem = ({ review, onDelete }) => {
+  const navigate = useNavigate();
   const { rating, text, createdAt, repository } = review;
+
+  const handleDelete = () => {
+    Alert.alert(
+      "Delete review",
+      "Are you sure you want to delete this review?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => onDelete(review.id),
+        },
+      ]
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -54,6 +76,18 @@ const MyReviewItem = ({ review }) => {
           {format(new Date(createdAt), "dd.MM.yyyy")}
         </Text>
         <Text>{text}</Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="View repository"
+            color="#0366d6"
+            onPress={() => navigate(`/repository/${repository.id}`)}
+          />
+          <Button
+            title="Delete review"
+            color="#d73a4a"
+            onPress={handleDelete}
+          />
+        </View>
       </View>
     </View>
   );
